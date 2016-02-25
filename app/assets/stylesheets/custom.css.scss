@@ -1,2 +1,55 @@
+$navbar-default-bg: #000;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+#logo {
+	float: left;
+	font-size: 1.7em;
+	color: white;
+	/*text-transform: uppercase;*/
+	letter-spacing: -1px;
+	font-weight: bold;
+}
+
+#logo:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+.center	{
+	text-align: center;
+}
+
+.jumbotron {
+	background-image: asset-url("BluePillRedPill.jpg");
+	background-size: cover;
+	height: 420px;
+}
+
+.jumbotron h2 {
+	color: #fff;
+	text-align: center;
+	margin-bottom: 190px;
+	letter-spacing: -1px;
+}
+
+.btn-xlarge {
+	color: #fff;
+  padding: 30px 48px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+}
+
+.navbar-default
+.navbar-nav > li > a {
+  color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+	color: #bbf;
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+	background-color: #06066b;
+	color: #bbf;	
+}
