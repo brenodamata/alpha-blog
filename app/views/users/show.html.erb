@@ -1,20 +1,17 @@
 <h2 align="center"><%= @user.username %> </h2>
-<div class="well col-xs-8 col-xs-offset-2">
-  <h4>Email: <%= @user.email %></h4>
 
-  Articles:
-  <ul>
-	  <% @user.articles.each do |article| %>
-	  	<li>
-	  		<%= link_to article.title, article_path(article) %>
-	  	</li>
-	  <% end %>	
-	</ul>
-
- 	<div class="btn-actions">
-		<%= link_to 'Delete account', user_path(@user), 	 method: :delete, 
-																							 data: {confirm: "Are you sure you want to delete your account?"}, 
-																							 class: "btn btn-xs btn-danger btn-right" %>
-		<%= link_to 'Edit account', edit_user_path(@user), class: "btn btn-xs btn-primary btn-right" %> 
+<div class="row">
+	<div class="col-md-4 col-md-offset-4 center">
+		<%= gravatar_for @user, size: 150 %>
 	</div>
+</div>
+
+<br>
+<%= render 'articles/article', obj: @user.articles %>
+
+<div class="btn-actions">
+	<%= link_to 'Delete account', user_path(@user), 	 method: :delete, 
+																						 data: {confirm: "Are you sure you want to delete your account?"}, 
+																						 class: "btn btn-xs btn-danger btn-right" %>
+	<%= link_to 'Edit account', edit_user_path(@user), class: "btn btn-xs btn-primary btn-right" %> 
 </div>
