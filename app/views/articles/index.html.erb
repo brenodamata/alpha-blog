@@ -14,6 +14,11 @@
 
         <div class="article-body">
           <%= truncate(article.description, length: 100) %>
+          
+          <div class="article-meta-details">
+            <small>Created by: <%= article.user ? article.user.username : "Anonymous" %>,
+                   <%= time_ago_in_words(article.created_at) %> ago.</small>
+          </div>
 
             <%= link_to 'Delete', article_path(article), method: :delete, 
                                                           data: {confirm: "Are you sure you want to delete this article?"}, 
