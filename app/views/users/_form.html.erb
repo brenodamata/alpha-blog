@@ -41,7 +41,7 @@
 
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <%= f.submit "Signup", class: "btn btn-primary" %>
+          <%= f.submit(@user.new_record? ? "Signup" : "Update account", class: "btn btn-primary") %>
         </div>
       </div>
       <% end %>
