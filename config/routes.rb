@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  resources :comments
-  resources :comments
-  resources :users
-  resources :articles
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -12,6 +8,13 @@ Rails.application.routes.draw do
   # Example of regular route:
   get 'home'  => 'pages#home'
   get 'about' => 'pages#about'
+
+  # resources :comments
+  resources :articles
+  
+  #  Sessions
+  get  'signup', to: 'users#new'
+  resources :users, except: :new
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
