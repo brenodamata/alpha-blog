@@ -1,5 +1,15 @@
 <h1 align="center">Listing Articles
   <%= link_to '', new_article_path, class: "btn btn-default btn-right btn-image glyphicon glyphicon-plus" %>
 </h1>
+
 <br>
+
+<div align="center">
+	<%= will_paginate %> 
+</div>
+
 <%= render 'article', obj: @articles %>
+
+<div align="center">
+	<%= will_paginate %> 
+</div>
