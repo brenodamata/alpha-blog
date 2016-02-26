@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     #TODO take out this hardcode    
-    # @article.user = User.first
+    @article.user = current_user
     
     respond_to do |format|
       if @article.save
