@@ -22,6 +22,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        session[:user_id] = @user.id
         flash[:success] = 'Welcome to A Popcorn Culture!'
         format.html { redirect_to @user }
         format.json { render :show, status: :created, location: @user }
@@ -52,8 +53,9 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      flash[:danger] = 'User was successfully destroyed.'
-      format.html { redirect_to users_url }
+      session[:user_id] = nil
+      flash[:danger] = 'Your account has been deleted'
+      format.html { redirect_to home_path }
       format.json { head :no_content }
     end
   end
