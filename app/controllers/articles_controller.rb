@@ -3,31 +3,22 @@ class ArticlesController < ApplicationController
   before_action :require_user,         except: [:show, :index]
   before_action :require_current_user, only:   [:edit, :update, :destroy]
 
-  # GET /articles
-  # GET /articles.json
   def index
-    @articles = Article.paginate(page: params[:page], per_page: 5)
+    @articles = Article.paginate(page: params[:page], per_page: 5).order(created_at: :desc)
   end
 
-  # GET /articles/1
-  # GET /articles/1.json
   def show
   end
 
-  # GET /articles/new
   def new
     @article = Article.new
   end
 
-  # GET /articles/1/edit
   def edit
   end
 
-  # POST /articles
-  # POST /articles.json
   def create
     @article = Article.new(article_params)
-    #TODO take out this hardcode    
     @article.user = current_user
     
     respond_to do |format|
@@ -42,8 +33,6 @@ class ArticlesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /articles/1
-  # PATCH/PUT /articles/1.json
   def update
     respond_to do |format|
       if @article.update(article_params)
@@ -57,8 +46,6 @@ class ArticlesController < ApplicationController
     end
   end
 
-  # DELETE /articles/1
-  # DELETE /articles/1.json
   def destroy
     @article.destroy
     respond_to do |format|
@@ -80,7 +67,7 @@ class ArticlesController < ApplicationController
     end
 
     def require_current_user
-      if current_user != @article.user
+      if current_user != @article.user && !current_user.admin?
         flash[:danger] = "You can only modified your own articles."
         redirect_to root_path
       end

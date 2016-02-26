@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user,             only: [:show, :edit, :update, :destroy]
-  before_action :require_current_user, only: [:edit, :update, :destroy]
+  before_action :require_current_user, only: [:edit, :update]
+  before_action :require_user_or_admin, only: :destroy
 
   def index
     @users = User.all
@@ -33,8 +34,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -48,14 +47,13 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
+    bouncer = @user.id
     @user.destroy
     respond_to do |format|
-      session[:user_id] = nil
-      flash[:danger] = 'Your account has been deleted'
-      format.html { redirect_to home_path }
+      session[:user_id] = nil if bouncer == session[:user_id]
+      flash[:danger] = 'User and all articles by user have been deleted.'
+      format.html { redirect_to users_path }
       format.json { head :no_content }
     end
   end
@@ -72,10 +70,17 @@ class UsersController < ApplicationController
     end
 
     def require_current_user
-      if current_user != @user
+      if current_user != @user && current_user.admin?
         flash[:danger] = "Access dinied. I think we both know why."
         redirect_to root_path
       end
       
+    end
+
+    def require_user_or_admin
+      if logged_in? and !current_user.admin? && !current_user != @user
+        flash[:danger] = "Only admin users can perform that action."
+        redirect_to root_path
+      end
     end
 end
