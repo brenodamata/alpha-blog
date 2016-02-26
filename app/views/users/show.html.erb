@@ -14,9 +14,11 @@
 	<%= will_paginate @user_articles %>
 </div>
 
+<% if logged_in? && current_user == @user %>
 <div class="btn-actions">
 	<%= link_to 'Delete account', user_path(@user), 	 method: :delete, 
 																						 data: {confirm: "Are you sure you want to delete your account?"}, 
 																						 class: "btn btn-xs btn-danger btn-right" %>
 	<%= link_to 'Edit account', edit_user_path(@user), class: "btn btn-xs btn-primary btn-right" %> 
 </div>
+<% end %>
