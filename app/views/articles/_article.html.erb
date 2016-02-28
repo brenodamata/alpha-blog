@@ -16,6 +16,10 @@
                    <%= time_ago_in_words(article.created_at) %> ago.</small>
           </div>
 
+          <% if article.categories.any? %>
+            <p>Categories: <%= render article.categories %></p>
+          <% end %>
+
           <% if logged_in? && (current_user == article.user || current_user.admin?) %>
 
             <%= link_to 'Delete', article_path(article), method: :delete, 
