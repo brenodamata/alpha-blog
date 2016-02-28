@@ -3,7 +3,12 @@
 one:
   username: MyString
   email: MyString
-
+  
 two:
   username: MyString
   email: MyString
+
+admin:
+  username: Jon
+  email: jon@a.b
+  admin: true
