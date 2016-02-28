@@ -7,7 +7,7 @@ class	SessionsController < ApplicationController
 	def create
 		user = User.find_by_email(params[:session][:login])
 		
-		user = User.find_by(username: params[:session][:login]) unless user
+		user = User.find_by(username: params[:session][:login].capitalize) unless user
 		
     respond_to do |format|
       if user && user.authenticate(params[:session][:password])
